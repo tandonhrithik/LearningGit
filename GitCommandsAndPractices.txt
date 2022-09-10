@@ -202,7 +202,14 @@ Why?
 Fork -> myUserAccount
 	Now, we have complete freedom to make any changes to that repo under own own github	
 
+git fetch 
+	can be used to fetch either just one repo or used with <group> keyword to fetch a number of them
 
+git bisect 
+	It can be used to find which commit in the commit history introduced a bug
+
+git squash
+	git squash can be used to combine multiple commits into a single commit in the commit history
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Advance/Intermediate Git:
 
