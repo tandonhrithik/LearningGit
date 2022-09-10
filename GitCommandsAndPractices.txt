@@ -1,0 +1,304 @@
+Github
+
+What is git?
+
+- git is a version control system. Free, open source, most used
+
+version control?
+
+- A way how we as programmers track our code changes. This helps us to see what we did when and go 
+back to previous version
+
+
+
+-CLI - Command Line interface
+
+- cd - change directory. use cd in command line to change folders
+
+	-cd then type in the folder that we want to get to
+
+-code editor - word processor for writing code
+
+Repository - refers to a folder where your project is kept or project
+
+git - a tool that tracks the changes over time
+
+github - a place where we host all our repositories
+
+
+
+Git commands
+
+clone - Bring a repository from github to local machine
+
+add - Track your files and changes in git
+	-Used to tell git that we made changes adn we would like to add those changes
+
+commit - save your files/changes
+	
+push - upload git commits to remote reposit like github
+	-We add, then commit and then push to remote repos like github
+
+
+pull - download changes from repository to local machine
+
+add . adds all untracked or new files
+or we can individually add the untracked files as we see fit
+
+git --version to check installed git version
+
+git clone urlfromgithub 
+	to clone repo onto local machin
+
+how to tell we are in a git repo? 
+	use ls -la
+	it lists all hidden files in the directory
+	The hidden git folder saves all our changes and indicates that we are in a git repo
+
+git status 
+	shows me all files that were updated or created but haven't been tracked/added/commited yet
+
+git add .
+	track all files listed in the repo. Both changed and unchanged. We could also tell it names of each individual file to track
+
+git commit -m "Message regarding what or why of the changes" -m "some description"
+
+git push
+	git push command tells git that we want to push the changes onto a remote repo
+
+ssh-keygen -t rsa -b 4096 -C "emailaddress@example.com"
+	Use this command to generate the SSH key
+	use the ".pub" key on github
+	Everytime we want to connect to github, we show our private key to verify that it generated the public key
+	copy the key and then github -> settings ->SSH keys -> add SSH key
+	then add the SSH key into the local machine using the steps on the github help tutorial
+
+git push origin main
+	origin stands for the location of the repo
+	main refers to the branch that we are pushing to
+	refresh the github and check out the changes
+
+git init
+	Turn the local folder into a git repository
+
+git add -> git commit -m "  " -> git push origin main
+
+Now, we need to create a empty repo on github if we want to push a locally-initialized reposit onto github
+
+create new repo on github. copy teh url link
+
+git remote add origin urllink  -> git push origin main
+
+git push -u origin master
+	-u is upstream. it sets origin main as upstream and so we can just use git push instead of git push origin main
+
+github Workflow
+
+Write code -> commit changes ->make a pull request
+
+local git workflow:
+
+write code -> stagechanges(git add) -> commit changes(git commit) -> push changes(git push) -> make a pull request
+
+
+
+Git Branch:
+When we create a new branch, new updates to new branch are only visible to that branch
+Extremely useful as we can make sure that the new code works properly before merging it with the main branch
+
+git branch
+	displays the branches in the repo
+	* tells which branch We are currently on
+
+git checkout -b nameOfBranch
+	git checkout is used to switch between branches
+	-b is used to create a new branch
+	press tab to autofill the branch name
+
+git diff nameOfTheBranch
+	what changes have been made and compares the two different versions of the code
+
+git merge nameOfTheBranch
+	to merge the changes
+
+git push origin nameOfTheNewBranch
+	
+pull request or pr
+	a request to have the code be pulled into another branch
+	to request changes from sidebranch to mainbranch, we make a pr from sidebranch to master branch
+
+Once we make a pr, anyone can review our code, comment and all else.
+
+Once a pr is merged, we can delete the side branch
+
+github -> compare and pull request -> list the changes made and reasoning -> Create pull request
+
+Now, we can see the comments that people have made in the pull request, check the diff between the two different version
+	add our own comments etc.
+
+merge pull request and then we can see the changes
+
+locally now, we need to pull changes from remote location to local machine
+
+git pull origin main
+
+git branch -d nameOfTheBranch
+	-d means delete the branch
+
+merge conflicts : When the main branch is getting updated from various different branches, the git can have trouble understanding which code to keep
+
+*Always good practice to do git status before we commit anything
+
+git diff
+	shows all the changes that have been made since the last commit
+
+git commit -am "Description"
+	commit -am command basically tells git to add and commit at the same time
+	This only works for modified files and not newly created files
+	
+git stash is basically a way to stash the the changes somewhere and pull them back later
+if we have two different branches that made changes or additions to the same line of the code,
+	To solve merge conflicts, we can make use of VS Code or github or make changes accordingly
+
+since the main branch is always being worked on, it is important to often pull the main branch from the github and
+	to merge it with the local branch so as to make sure that our code is up to date
+
+undoing in git:
+
+What if we make a mistake or add/commit something we didn't mean to commit?
+
+undoing add:
+
+git add nameOfTheFile
+git reset nameOfTheFile
+
+undoing commit:
+git add nameoffile
+git commit -m " asdasd"
+git reset HEAD~1
+	To git, HEAD means the pointer to the last commit
+	HEAD~1 tells the git that instead of going to last commit, i want to go one step further back, before the changes were commit
+
+For multiple commits,
+git log: shows a log of the commit messages made in reverse chronological order
+
+To go back to a certain commit, the commit:12311939 is a kind of a hash. 
+So copy the hash and then 
+
+git reset 12311939
+	unstages any changes made to the file after the commit
+
+git reset --hard 12311939
+	Tells git that now I want any changes made after this commit to not only be unstaged but also completely removed.
+
+Forking in git:
+
+Fork makes a complete copy of the git repo
+Why?
+	We don't want to fork our own repo but other people's repos.
+	Now, we don't have permission to make changes to other people's repo.
+	If we want to branch off of someone else's repo or make a pull request, we want to fork it
+
+Fork -> myUserAccount
+	Now, we have complete freedom to make any changes to that repo under own own github	
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Advance/Intermediate Git:
+
+The perfect Commit:
+
+1) add the right changes
+	Being selective about what should go into next commit
+	For Instance, when we have 2 or 3 files that need to be committed, select which commit to make now, see how it works and then make another commit
+	Too many changes makes it hard to udnerstand the changes.
+	We can even split parts of the file for different commits
+	Only combine changes of the same topic in a single commit
+
+git add -p FileName
+	p brings us to the patch level and then we can decide which changes in the file to commit and which not.
+	y for yes and n for no.
+	
+	This will help inmprove readability of the commit
+
+2)add the proper message and desription
+	The perfect commit message:
+	1)Subject = concise summary of what happened
+			If we have trouble writing something concise then it might mean that we ahve added too many different topics into a single commit
+
+	2)Body - detailed explanation
+		-What is different now?
+		-What is the reason for the change?
+		-Is there anything to watch out for/anything that is remarkable?
+
+
+Branching strategies:
+	We need a written convention for branches
+	1) We need a written best practice of how work is ideally structured in these branches so taht to avoid mistakes and collision
+	
+	Integrating changes and structuring releases
+	1) Mainline development(Always be integrating)
+		few branches, relatively small commits, high quality testing and QA standards
+		We cannot risk huge commits into a model that requires constant integration
+	2) State, Release, and Feature Branches
+		Branches enhance structures and workflows
+		different types of branches that fulfill different types of jobs
+	
+	These all strategies depend upon the need and functioning of the TEAM
+
+	Two types of branches
+	1) Long-Running branches
+		exist through the complete lifetime of the project, like main or master
+		often, they mirror stages in the cycle
+		common convention: no direct commits
+			helps keep untested, unreviewed code away
+			helps release new code in batches making it easier to keep an eye on the changes being made
+		
+	2)Short-lived branches
+		for new features, bug fixes, refactoring, experiments etc
+		usually based on the main branch
+		will be deleted after the integration
+
+
+GitHubFlow branching strategy
+		-very simple, very lean:
+			only one main branch + feature branches
+GitFlow
+		-long-runing
+			"main" + "develop"
+		-short-lived:
+			"features, releases, hotfixes"
+			usually, test out fixes and all that stuff in the develop branch and then once we are confident in it, merge it into main
+
+
+Pull Requests:
+	Helps communicate and review code before merging it.
+	Helps get a second pair of eyes before merging into the main code
+	They also help contribute to other repositories
+
+
+
+Merge Conflicts:
+	When Integrating commits come from different sources
+	When contradictory changes are made, then human factor is need to solve the conflict
+	Git tells us when a conflict occurs
+	We can also use git status
+	We can undo a conflict using git merge --abort or git rebase --abort
+	git marks the problematic area whenever a conflict occurs
+	
+	Solving conflicts:
+	Clean up the conflicting files and make sure that it contains just what we want.
+	Some Git GUI's can helpful in solving conflicts providing a better visual of why the conflict occured
+	We can also use some git mergetool
+
+Merge vs rebase:
+	when git performs a merge, it first looks for the common ancestor commit, then last commit on Branch A and branch B
+	Fast-forward merge, both branches share same history
+	Merge commit is the commit that contains the difference between the branches
+	
+	rebase is different than merge with its own pros and cons
+	git rebase BranchName
+	git first removes all commit made on Branch A since common ancestor and then applies the commits made on Branch B and then adds the removed commit back
+	it makes the development look like a straight line since now there is no merge commit
+	It rewrites history about the commits that have been made
+		As such, if there commits that have already been pushed and is being rebased, it will change the history and then screw up the developers who based their project on that commit
